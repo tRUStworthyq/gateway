@@ -1,3 +1,18 @@
 spring:
   application:
     name: gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: self-test
+              uri: http://localhost:${server.port:8080}
+              predicates:
+                - Path=/proxy/**
+              filters:
+                - StripPrefix=1
+
+logging:
+  pattern:
+    level: "%5p [%X{requestId:-}]"
