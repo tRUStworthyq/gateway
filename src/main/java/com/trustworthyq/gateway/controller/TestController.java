@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @GetMapping("/hello")
+    @GetMapping("/self-echo")
     public HelloResponse hello(
             @RequestHeader(value = "X-Request-Id", required = false) String requestId) {
         return new HelloResponse(
