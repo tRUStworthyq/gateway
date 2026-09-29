@@ -18,9 +18,11 @@ spring:
             - id: core-test
               uri: ${CORE_BASE_URL}
               predicates:
-                - Path=/hello/**
-              filters:
-                - TokenRelay=
+                - Path=/**
+          default-filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
+            - RemoveResponseHeader=Set-Cookie
 
   security:
     oauth2:
