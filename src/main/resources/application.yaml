@@ -15,12 +15,19 @@ spring:
                 - Path=/proxy/**
               filters:
                 - StripPrefix=1
-            - id: core-test
+            - id: core
               uri: ${CORE_BASE_URL}
               predicates:
-                - Path=/**
+                - Path=/api/**,/hello,/hello/**,/swagger-ui.html,/swagger-ui/**,/v3/api-docs/**
+              filters:
+                - TokenRelay=
+            - id: frontend
+              uri: ${FRONTEND_BASE_URL:http://localhost:5173}
+              predicates:
+                - Path=/,/login,/register,/assets/**
+              filters:
+                - RemoveRequestHeader=Authorization
           default-filters:
-            - TokenRelay=
             - RemoveRequestHeader=Cookie
             - RemoveResponseHeader=Set-Cookie
 
